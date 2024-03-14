@@ -1,4 +1,4 @@
-import { accounts, INFURA_API_KEY } from "./utils/constants";
+import { accounts, ledgerAccounts, INFURA_API_KEY } from "./utils/constants";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -15,7 +15,7 @@ const networks: any = {
 };
 
 
-if (accounts) {
+if (accounts || ledgerAccounts) {
   networks.polygon = {
     live: true,
     chainId: 137,
@@ -223,6 +223,179 @@ if (accounts) {
   } else {
     console.warn("No infura key available");
   }
+
+  networks.polygonLedger = {
+    live: true,
+    chainId: 137,
+    url: `https://rpc.ankr.com/polygon`,
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.polygonMumbaiLedger = {
+    live: true,
+    chainId: 80001,
+    url: "https://rpc-mumbai.maticvigil.com",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.bscLedger = {
+    live: true,
+    chainId: 56,
+    url: "https://bsc-dataseed.binance.org",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.bscTestnetLedger = {
+    live: true,
+    chainId: 97,
+    url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.avalancheLedger = {
+    live: true,
+    chainId: 43114,
+    url: "https://api.avax.network/ext/bc/C/rpc",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.avalancheFujiTestnetLedger = {
+    live: true,
+    chainId: 43113,
+    url: "https://api.avax-test.network/ext/bc/C/rpc",
+    ledgerAccounts,
+    gas: 2100000,
+    gasPrice: 50000000000,
+    maxPriorityFeePerGas: 2000000000,
+    maxFeePerGas: 51500000000,
+    tags: ["staging"],
+  };
+
+  networks.optimisticEthereumLedger = {
+    live: true,
+    chainId: 10,
+    url: "https://mainnet.optimism.io",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.optimisticGoerliLedger = {
+    live: true,
+    chainId: 420,
+    url: "https://goerli.optimism.io",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.arbitrumOneLedger = {
+    live: true,
+    chainId: 42161,
+    url: "https://arb1.arbitrum.io/rpc",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.arbitrumGoerliLedger = {
+    live: true,
+    chainId: 421613,
+    url: "https://goerli-rollup.arbitrum.io/rpc",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.auroraLedger = {
+    live: true,
+    chainId: 1313161554,
+    url: "https://mainnet.aurora.dev",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.auroraTestnetLedger = {
+    live: true,
+    chainId: 1313161555,
+    url: "https://testnet.aurora.dev",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.moonbeamLedger = {
+    live: true,
+    chainId: 1284,
+    url: "https://moonbeam.public.blastapi.io",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.moonbaseAlphaLedger = {
+    live: true,
+    chainId: 1287,
+    url: "https://moonbase-alpha.public.blastapi.io",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.harmonyLedger = {
+    live: true,
+    chainId: 1666600000,
+    url: "https://api.harmony.one",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.harmonyTestLedger = {
+    live: true,
+    chainId: 1666700000,
+    url: "https://api.s0.b.hmny.io",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.operaLedger = {
+    live: true,
+    chainId: 250,
+    url: "https://fantom-mainnet.public.blastapi.io",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.ftmTestnetLedger = {
+    live: true,
+    chainId: 4002,
+    url: "https://endpoints.omniatech.io/v1/fantom/testnet/public",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+
+  networks.gnosisLedger = {
+    live: true,
+    chainId: 100,
+    url: "https://rpc.gnosischain.com",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.energyWebLedger = {
+    live: true,
+    chainId: 246,
+    url: "https://rpc.energyweb.org",
+    ledgerAccounts,
+    tags: ["prod"],
+  };
+
+  networks.energyWebVoltaTestnetLedger = {
+    live: true,
+    chainId: 73799,
+    url: "https://volta-rpc.energyweb.org",
+    ledgerAccounts,
+    tags: ["staging"],
+  };
+  
 } else {
   console.warn("No accounts (private key or mnemonic) available");
 }

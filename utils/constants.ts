@@ -11,6 +11,10 @@ export const accounts =
         mnemonic: process.env.HDWALLET_MNEMONIC,
       };
 
+export const ledgerAccounts = [
+  "0x0",
+];
+
 export const SALT = process.env.SALT || "...";
 
 export const INFURA_API_KEY = process.env.INFURA_API_KEY || "";
