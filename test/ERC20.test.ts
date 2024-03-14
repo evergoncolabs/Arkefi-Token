@@ -22,11 +22,11 @@ describe("ERC20", () => {
     [initialHolder, recipient, anotherAccount, proxyAdmin] = await ethers.getSigners();
     Token = await ethers.getContractFactory("ArkefiToken");
     TestProxy = await ethers.getContractFactory("TestProxy");
-    tokenImplementation = await Token.deploy();
+    tokenImplementation = await Token.deploy(maxTotalSupply);
   });
 
   beforeEach(async () => {
-    const populatedTx = await tokenImplementation.populateTransaction.init(name, symbol, initialHolder.address, maxTotalSupply);
+    const populatedTx = await tokenImplementation.populateTransaction.init(name, symbol, initialHolder.address);
     testProxy = await TestProxy.deploy(tokenImplementation.address, proxyAdmin.address, populatedTx.data);
     token = await ethers.getContractAt("ArkefiToken", testProxy.address) as ArkefiToken;
     await token.mint(initialHolder.address, initialSupply);

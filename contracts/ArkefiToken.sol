@@ -6,31 +6,31 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20Snapshot
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/draft-ERC20PermitUpgradeable.sol";
 
 contract ArkefiToken is ERC20PresetMinterPauserUpgradeable, ERC20SnapshotUpgradeable, ERC20PermitUpgradeable {
-    uint256 private constant VERSION = 1;
+    uint256 private constant _version = 1;
 
     // The cap or max total supply of the token.
-    uint256 private _cap;
+    uint256 private immutable _cap;
 
     event BatchMint(address indexed sender, uint256 recipientsLength, uint256 totalValue);
 
-    constructor() initializer {}
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor(uint256 cap_) {
+        require(cap_ > 0, "RKFI: cap is 0");
+        _cap = cap_;
 
-    function init(string memory name, string memory symbol, address admin, uint256 cap_) public initializer {
+        _disableInitializers();
+    }
+
+    function init(string memory name, string memory symbol, address admin) public initializer {
         __ERC20_init_unchained(name, symbol);
         __ERC20Snapshot_init_unchained();
         __ERC20Permit_init(name);
         __Pausable_init_unchained();
-        __ArkefiToken_init_unchained(cap_);
         // We don't use __ERC20PresetMinterPauser_init_unchained to avoid giving permisions to _msgSender
         require(admin != address(0), "RKFI: Admin can't be zero address");
         _setupRole(DEFAULT_ADMIN_ROLE, admin);
         _setupRole(MINTER_ROLE, admin);
         _setupRole(PAUSER_ROLE, admin);
-    }
-
-    function __ArkefiToken_init_unchained(uint256 cap_) internal onlyInitializing {
-        require(cap_ > 0, "RKFI: cap is 0");
-        _cap = cap_;
     }
 
     // Update balance and/or total supply snapshots before the values are modified. This is implemented
@@ -89,7 +89,7 @@ contract ArkefiToken is ERC20PresetMinterPauserUpgradeable, ERC20SnapshotUpgrade
 
     /// @dev Returns the version of the contract.
     function contractVersion() external pure returns (uint256) {
-        return VERSION;
+        return _version;
     }
 
     /**

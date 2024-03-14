@@ -28,13 +28,14 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const deployResult = await deploy(contractName, {
       from: deployer,
       deterministicDeployment: ethers.utils.formatBytes32String(SALT),
+      args: [MAX_TOTAL_SUPPLY],
       proxy: {
         owner: admin,
         proxyContract: "OptimizedTransparentProxy",
         execute: {
           init: {
             methodName: "init",
-            args: [TOKEN_NAME, TOKEN_SYMBOL, admin, MAX_TOTAL_SUPPLY],
+            args: [TOKEN_NAME, TOKEN_SYMBOL, admin],
           },
         },
       },
