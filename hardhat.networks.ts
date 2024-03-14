@@ -395,7 +395,43 @@ if (accounts || ledgerAccounts) {
     ledgerAccounts,
     tags: ["staging"],
   };
-  
+
+  if (INFURA_API_KEY) {
+    networks.mainnetLedger = {
+      live: true,
+      chainId: 1,
+      url: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
+      accounts,
+      tags: ["prod"],
+    };
+
+    networks.goerliLedger = {
+      live: true,
+      chainId: 5,
+      url: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+      accounts,
+      gas: 2100000,
+      gasPrice: 50000000000,
+      maxPriorityFeePerGas: 2000000000,
+      maxFeePerGas: 51500000000,
+      tags: ["staging"],
+    };
+
+    networks.sepoliaLedger = {
+      live: true,
+      chainId: 11155111,
+      url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
+      accounts,
+      gas: 2100000,
+      gasPrice: 50000000000,
+      maxPriorityFeePerGas: 2000000000,
+      maxFeePerGas: 51500000000,
+      tags: ["staging"],
+    };
+  } else {
+    console.warn("No infura key available");
+  }
+
 } else {
   console.warn("No accounts (private key or mnemonic) available");
 }

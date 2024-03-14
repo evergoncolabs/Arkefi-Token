@@ -12,7 +12,7 @@ export const accounts =
       };
 
 export const ledgerAccounts = [
-  "0x0",
+  process.env.LEDGER_ADDRESS || "0x0"
 ];
 
 export const SALT = process.env.SALT || "...";
