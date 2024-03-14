@@ -42,7 +42,7 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
       log: true,
     });
 
-    await verifyContract(network, deployResult, contractName);
+    //await verifyContract(network, deployResult, contractName);
 
     return true;
   }

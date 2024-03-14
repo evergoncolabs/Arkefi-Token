@@ -11,7 +11,7 @@ export const accounts =
         mnemonic: process.env.HDWALLET_MNEMONIC,
       };
 
-export const SALT = process.env.SALT || "ArtbanxSalt";
+export const SALT = process.env.SALT || "...";
 
 export const INFURA_API_KEY = process.env.INFURA_API_KEY || "";
 
