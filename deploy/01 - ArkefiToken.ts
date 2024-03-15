@@ -4,6 +4,10 @@ import { verifyContract } from "../utils/verifyContract";
 import { TOKEN_NAME, TOKEN_SYMBOL } from "../utils/constants";
 import { ethers } from "ethers";
 import { SALT, MAX_TOTAL_SUPPLY } from "../utils/constants";
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
 const version = "v1.0.0";
 const contractName = "ArkefiToken";
 
@@ -22,7 +26,12 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
 
     const { deploy } = deployments;
 
-    const { deployer, admin } = await getNamedAccounts();
+    let { deployer, admin } = await getNamedAccounts();
+
+    // Owner of the contract is the deployer
+    if(process.argv.slice(4)[0] == "keepOwnership"){
+      admin = deployer;
+    }
 
     console.log(`Deploying ${contractName} ${version}\n`);
 
@@ -66,5 +75,5 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
 const id = contractName + version;
 
 export default func;
-func.tags = [contractName, version, "upgrade"];
+func.tags = [contractName, version, "upgrade", "keepOwnership"];
 func.id = id;

@@ -22,6 +22,7 @@ import {
 } from "./utils/constants";
 
 import "./scripts/mintTokens";
+import "./scripts/transferOwnership";
 
 dotenv.config();
 
