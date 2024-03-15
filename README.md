@@ -34,7 +34,7 @@ To deploy use
 ```bash
 yarn deploy <NetworkName>
 ```
-Where NetworkName is one of the networks configured in (hardhat.networks.ts)[./hardhat.networks.ts] (ledger option has "ledger" at the end of the name)
+Where NetworkName is one of the networks configured in (hardhat.networks.ts)[./hardhat.networks.ts] (ledger option has "Ledger" at the end of the name)
 Deployment is deterministic, this means that it can be precalculated and that it will have the same address across all chains.
 **Important to keep the same address, SALT and BYTECODE must be the same, bytecode includes not just the compiled contracts, but the parameters used in the constructor as well**
 
