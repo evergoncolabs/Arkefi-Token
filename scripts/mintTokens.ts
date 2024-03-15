@@ -5,6 +5,7 @@ import { Contract } from "ethers";
 // yarn mintTokens <network name> <address> <amount>
 
 // This script only works if the deployer is the admin of the contract
+// Amount is parsed to ether
 
 task("mintTokens", "Mint tokens to an address")
     .addPositionalParam("user")
@@ -15,7 +16,8 @@ task("mintTokens", "Mint tokens to an address")
 
         console.log("Minting tokens...");
 
-        const tx = await arkefiToken.mint(taskArgs.user, taskArgs.amount);
+        const tx = await arkefiToken.mint(taskArgs.user, ethers.utils.parseEther(taskArgs.amount));
+
         await tx.wait();
 
         console.log("\nTokens minted successfully\n");
