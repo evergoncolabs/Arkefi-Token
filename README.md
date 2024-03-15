@@ -46,4 +46,8 @@ If the network where you are deploying uses Blockscout, use Sourcify instead.
 yarn hardhat --network <NetworkName> sourcify
 ```
 
-
+## Mint
+If the owner of the contract is the deployer, you can mint tokens setting the addresses and amounts in (mintTokens.ts)[./scripts/mintTokens.ts] and using
+```bash
+yarn mintTokens <NetworkName>
+```

@@ -1,9 +1,9 @@
 import { Contract } from "ethers";
 import { ethers } from "hardhat";
 
-let usersToMint: string[] = ["0x876Da55cfac9E18fE0C68Bcc7dbf0FFB24EBC472"]; // Cannot be empty
+let usersToMint: string[] = [""]; // Cannot be empty
 
-let amountsToMint: string[] = ["1"]; // Cannot be empty
+let amountsToMint: string[] = [""]; // Cannot be empty
 
 // command to execute script:
 // yarn mintTokens <network name>
@@ -18,7 +18,7 @@ export async function main() {
     if (usersToMint.length == 0) {
         throw new Error("usersToMint cannot be empty");
     }
-    
+
     if (amountsToMint.length != usersToMint.length) {
         throw new Error("amountsToMint must have the same length as usersToMint");
     }
