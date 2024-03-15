@@ -34,11 +34,20 @@ yarn coverage
 ```
 
 ## Deploy
-To deploy use
+To deploy and give the ownership to the Multisig address run
 ```bash
 yarn deploy <NetworkName>
 ```
-Where `NetworkName` is one of the networks configured in (hardhat.networks.ts)[./hardhat.networks.ts] (ledger option has `-Ledger` at the end of the name).
+Where `NetworkName` is one of the networks configured in (hardhat.networks.ts)[./hardhat.networks.ts] (ledger option has `Ledger` at the end of the name).
+
+## Deploy with mint
+To deploy, mint and then transfer the ownership to the Multisig address run
+```bash
+yarn deployKeepOwnership <NetworkName>
+yarn mintTokens <NetworkName> <UserAddress> <MintAmount>
+yarn transferOwnership <NetworkName>
+```
+Where `UserAddress` is the user who will be minted the tokens and `MintAmount` is the amount of tokens to mint (parsed to ethers).
 
 Deployment is deterministic, this means that it can be precalculated and that it will have the same address across all chains.
 **Important to keep the same address, SALT and BYTECODE must be the same, bytecode includes not just the compiled contracts, but the parameters used in the constructor as well**
@@ -51,8 +60,14 @@ If the network where you are deploying uses Blockscout, use Sourcify instead.
 yarn hardhat --network <NetworkName> sourcify
 ```
 
-## Minting (recommended only for test environments)
+## Minting
 If the owner of the contract is the same as the deployer (i.e. if you don't set up a Multisig owner or if you set Multisig as the same address as the deployer address), you can mint tokens running the HardHat task [mintTokens.ts](./scripts/mintTokens.ts) by using:
 ```bash
-yarn mintTokens <NetworkName> <userToMint> <amountToMint>
+yarn mintTokens <NetworkName> <UserAddress> <MintAmount>
+```
+
+## Transfer ownership
+If the owner of the contract is the same as the deployer (i.e. if you don't set up a Multisig owner or if you set Multisig as the same address as the deployer address), you can transfer the ownership of the token contract and proxy admin contract to the Multisig set in the .env file running the HardHat task [transferOwnership.ts](./scripts/transferOwnership.ts) by using:
+```bash
+yarn transferOwnership <NetworkName>
 ```

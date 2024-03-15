@@ -12,8 +12,10 @@
     "test": "hardhat test",
     "coverage": "hardhat coverage",
     "size": "hardhat size-contracts",
+    "deployKeepOwnership": "hardhat deploy --tags keepOwnership --network",
     "deploy": "hardhat deploy --network",
-    "mintTokens": "npx hardhat mintTokens --network"
+    "mintTokens": "npx hardhat mintTokens --network",
+    "transferOwnership": "npx hardhat transferOwnership --network"
   },
   "author": "",
   "license": "ISC",
