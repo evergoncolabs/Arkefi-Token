@@ -52,7 +52,7 @@ yarn hardhat --network <NetworkName> sourcify
 ```
 
 ## Minting (recommended only for test environments)
-If the owner of the contract is the same as the deployer (i.e. if you don't set up a Multisig owner or if you set Multisig as the same address as the deployer address), you can mint tokens by setting the `target addresses` and `amounts` in the HardHat task [mintTokens.ts](./scripts/mintTokens.ts) by using:
+If the owner of the contract is the same as the deployer (i.e. if you don't set up a Multisig owner or if you set Multisig as the same address as the deployer address), you can mint tokens running the HardHat task [mintTokens.ts](./scripts/mintTokens.ts) by using:
 ```bash
-yarn mintTokens <NetworkName>
+yarn mintTokens <NetworkName> <userToMint> <amountToMint>
 ```
