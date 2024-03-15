@@ -1,34 +1,27 @@
+import { task } from "hardhat/config";
 import { Contract } from "ethers";
-import { ethers } from "hardhat";
-
-let usersToMint: string[] = [""]; // Cannot be empty
-
-let amountsToMint: string[] = [""]; // Cannot be empty
 
 // command to execute script:
-// yarn mintTokens <network name>
+// yarn mintTokens <network name> <address> <amount>
 
 // This script only works if the deployer is the admin of the contract
 
-export async function main() {
+task("mintTokens", "Mint tokens to an address")
+    .addPositionalParam("user")
+    .addPositionalParam("amount")
+    .setAction(async (taskArgs) => {
+        const userToMint = taskArgs.user;
 
-    // Get contract
-    const arkefiToken: Contract = await ethers.getContract("ArkefiToken");
+        const amountToMint = taskArgs.amount;
 
-    if (usersToMint.length == 0) {
-        throw new Error("usersToMint cannot be empty");
-    }
+        // Get contract
+        const arkefiToken: Contract = await ethers.getContract("ArkefiToken");
 
-    if (amountsToMint.length != usersToMint.length) {
-        throw new Error("amountsToMint must have the same length as usersToMint");
-    }
+        console.log("Minting tokens...");
 
-    console.log("Minting tokens...");
+        const tx = await arkefiToken.batchMint([userToMint], [amountToMint]);
+        await tx.wait();
 
-    const tx = await arkefiToken.batchMint(usersToMint, amountsToMint);
-    await tx.wait();
+        console.log("Tokens minted successfully");
+    });
 
-    console.log("Tokens minted successfully");
-}
-
-main();

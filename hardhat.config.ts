@@ -21,6 +21,8 @@ import {
   POLYGONSCAN_API_KEY
 } from "./utils/constants";
 
+import "./scripts/mintTokens";
+
 dotenv.config();
 
 const multisig = MULTISIG_ADDRESS; // Account 1
