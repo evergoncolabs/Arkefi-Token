@@ -12,7 +12,8 @@
     "test": "hardhat test",
     "coverage": "hardhat coverage",
     "size": "hardhat size-contracts",
-    "deploy": "hardhat deploy --network"
+    "deploy": "hardhat deploy --network",
+    "mintTokens": "npx hardhat run ./scripts/mintTokens.ts --network"
   },
   "author": "",
   "license": "ISC",
