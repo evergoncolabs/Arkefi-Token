@@ -11,18 +11,15 @@ task("mintTokens", "Mint tokens to an address")
     .addPositionalParam("user")
     .addPositionalParam("amount")
     .setAction(async (taskArgs) => {
-        const userToMint = taskArgs.user;
-
-        const amountToMint = taskArgs.amount;
-
         // Get contract
         const arkefiToken: Contract = await ethers.getContract("ArkefiToken");
 
         console.log("Minting tokens...");
 
-        const tx = await arkefiToken.batchMint([userToMint], [ethers.utils.parseEther(amountToMint)]);
+        const tx = await arkefiToken.mint(taskArgs.user, ethers.utils.parseEther(taskArgs.amount));
+
         await tx.wait();
 
-        console.log("Tokens minted successfully");
+        console.log("\nTokens minted successfully\n");
     });
 
