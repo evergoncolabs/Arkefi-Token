@@ -34,14 +34,14 @@ yarn coverage
 ```
 
 ## Deploy
-To deploy and give the ownership to the multiSig address run
+To deploy and give the ownership to the Multisig address run
 ```bash
 yarn deploy <NetworkName>
 ```
 Where `NetworkName` is one of the networks configured in (hardhat.networks.ts)[./hardhat.networks.ts] (ledger option has `Ledger` at the end of the name).
 
 ## Deploy with mint
-To deploy, mint and then transfer the ownership to the multiSig address run
+To deploy, mint and then transfer the ownership to the Multisig address run
 ```bash
 yarn deployKeepOwnership <NetworkName>
 yarn mintTokens <NetworkName> <UserAddress> <MintAmount>
@@ -60,8 +60,14 @@ If the network where you are deploying uses Blockscout, use Sourcify instead.
 yarn hardhat --network <NetworkName> sourcify
 ```
 
-## Minting (recommended only for test environments)
+## Minting
 If the owner of the contract is the same as the deployer (i.e. if you don't set up a Multisig owner or if you set Multisig as the same address as the deployer address), you can mint tokens running the HardHat task [mintTokens.ts](./scripts/mintTokens.ts) by using:
 ```bash
 yarn mintTokens <NetworkName> <UserAddress> <MintAmount>
+```
+
+## Transfer ownership
+If the owner of the contract is the same as the deployer (i.e. if you don't set up a Multisig owner or if you set Multisig as the same address as the deployer address), you can transfer the ownership of the token contract and proxy admin contract to the Multisig set in the .env file running the HardHat task [transferOwnership.ts](./scripts/transferOwnership.ts) by using:
+```bash
+yarn transferOwnership <NetworkName>
 ```
