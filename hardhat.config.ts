@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import networks from "./hardhat.networks";
 
 import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-ledger";
 import "@nomiclabs/hardhat-ethers";
 import "hardhat-deploy";
 import "hardhat-deploy-ethers";

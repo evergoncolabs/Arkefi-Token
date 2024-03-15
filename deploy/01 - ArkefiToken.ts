@@ -4,7 +4,7 @@ import { verifyContract } from "../utils/verifyContract";
 import { TOKEN_NAME, TOKEN_SYMBOL } from "../utils/constants";
 import { ethers } from "ethers";
 import { SALT, MAX_TOTAL_SUPPLY } from "../utils/constants";
-const version = "v2.0.0";
+const version = "v1.0.0";
 const contractName = "ArkefiToken";
 
 const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
@@ -16,14 +16,15 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     // manually to make sure everything is compiled
     // await hre.run('compile');
 
-    console.log(`Deploying ${contractName} ${version}`);
+    console.log(`Use contract ${contractName}\n`);
+
     const { deployments, getNamedAccounts, network } = hre;
 
     const { deploy } = deployments;
 
     const { deployer, admin } = await getNamedAccounts();
 
-    console.log(`Use contract ${contractName}`);
+    console.log(`Deploying ${contractName} ${version}\n`);
 
     const deployResult = await deploy(contractName, {
       from: deployer,
@@ -42,6 +43,12 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
       gasLimit: 4000000,
       log: true,
     });
+    
+    console.log(`\nDefaultProxyAdmin deployed to: ${deployResult.args![1]}\n`);
+
+    console.log(`${contractName}_Implementation deployed to: ${deployResult.implementation}\n`);
+
+    console.log(`Contract ${contractName} deployed to: ${deployResult.address}\n`);
 
     //await verifyContract(network, deployResult, contractName);
 
