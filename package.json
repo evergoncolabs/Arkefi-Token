@@ -13,7 +13,7 @@
     "coverage": "hardhat coverage",
     "size": "hardhat size-contracts",
     "deployKeepOwnership": "hardhat deploy --tags keepOwnership --network",
-    "deployTransferOwnership": "hardhat deploy --network",
+    "deploy": "hardhat deploy --network",
     "mintTokens": "npx hardhat mintTokens --network",
     "transferOwnership": "npx hardhat transferOwnership --network"
   },
